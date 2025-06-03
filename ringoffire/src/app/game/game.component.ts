@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import {NgForOf, NgStyle} from '@angular/common';
+import {NgForOf, NgIf, NgStyle} from '@angular/common';
 
 @Component({
   selector: 'app-game',
     imports: [
         NgForOf,
-        NgStyle
+        NgStyle,
+        NgIf
     ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss'
