@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {NgForOf, NgIf, NgStyle} from '@angular/common';
 import {Game} from '../models/game';
 import {PlayerComponent} from '../player/player.component';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
     selector: 'app-game',
@@ -9,11 +11,14 @@ import {PlayerComponent} from '../player/player.component';
         NgForOf,
         NgStyle,
         NgIf,
-        PlayerComponent
+        PlayerComponent,
+        MatButtonModule,
+        MatIconModule,
     ],
     templateUrl: './game.component.html',
     styleUrl: './game.component.scss'
 })
+
 export class GameComponent {
     pickCardAnimation: boolean = false;
     game: Game | undefined;
