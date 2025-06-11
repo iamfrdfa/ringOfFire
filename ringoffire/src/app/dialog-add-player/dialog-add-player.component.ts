@@ -1,8 +1,9 @@
-import {Component} from '@angular/core';
-import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule} from '@angular/material/dialog';
+import {Component, OnInit} from '@angular/core';
+import {MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule} from '@angular/material/dialog';
 import {MatFormField, MatInputModule, MatLabel} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
+import {MAT_DIALOG_DATA, MatDialogRef, MatDialogTitle} from '@angular/material/dialog';
 
 @Component({
     selector: 'app-dialog-add-player',
@@ -21,10 +22,16 @@ import {MatButtonModule} from '@angular/material/button';
     templateUrl: './dialog-add-player.component.html',
     styleUrl: './dialog-add-player.component.scss'
 })
-export class DialogAddPlayerComponent {
+export class DialogAddPlayerComponent implements OnInit {
     name: string = '';
 
-    onNoClick() {
+    constructor(public dialogRef: MatDialogRef<DialogAddPlayerComponent>) {
+    }
 
+    ngOnInit(): void {
+    }
+
+    onNoClick() {
+        this.dialogRef.close();
     }
 }

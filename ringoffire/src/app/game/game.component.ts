@@ -29,7 +29,7 @@ import {GameInfoComponent} from '../game-info/game-info.component';
 export class GameComponent {
     pickCardAnimation: boolean = false;
     game: Game | undefined;
-    currentCard: string = "";
+    currentCard: string | undefined = "";
 
     constructor(public dialog: MatDialog) {
     }
@@ -43,16 +43,21 @@ export class GameComponent {
         console.log(this.game);
     }
 
+
     takeCard() {
-        if (!this.pickCardAnimation) {
-            // @ts-ignore
+        if (!this.pickCardAnimation && this.game) {  // Prüfen ob this.game existiert
             this.currentCard = this.game.stack.pop();
             this.pickCardAnimation = true;
             console.log('New Card: ' + this.currentCard);
             console.log('Game is: ', this.game);
 
+            this.game.currentPlayer++;  // Jetzt sicher, da wir this.game überprüft haben
+            this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+
             setTimeout(() => {
-                this.game?.playedCards.push(this.currentCard)
+                if (this.currentCard != null) {
+                    this.game?.playedCards.push(this.currentCard)
+                }
                 this.pickCardAnimation = false;
             }, 1000)
         }
@@ -62,8 +67,9 @@ export class GameComponent {
         const dialogRef = this.dialog.open(DialogAddPlayerComponent, {});
 
         dialogRef.afterClosed().subscribe((name: string) => {
-            console.log('The dialog was closed by:', name);
-            this.game?.players.push(name);
+            if (name && name.length > 0) {
+                this.game?.players.push(name);
+            }
         });
     }
 }
