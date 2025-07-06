@@ -8,7 +8,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {DialogAddPlayerComponent} from '../dialog-add-player/dialog-add-player.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {GameInfoComponent} from '../game-info/game-info.component';
-
+import {AngularFirestore} from '@angular/fire/compat/firestore';
 
 @Component({
     selector: 'app-game',
@@ -31,18 +31,24 @@ export class GameComponent {
     game: Game | undefined;
     currentCard: string | undefined = "";
 
-    constructor(public dialog: MatDialog) {
+    constructor(private firestore: AngularFirestore, public dialog: MatDialog) {
     }
 
     ngOnInit(): void {
         this.newGame();
+        this
+            .firestore
+            .collection('games')
+            .valueChanges()
+            .subscribe((game) => {
+                console.log('Game Update: ', game);
+            });
     }
 
     newGame() {
         this.game = new Game();
         console.log(this.game);
     }
-
 
     takeCard() {
         if (!this.pickCardAnimation && this.game) {  // Prüfen ob this.game existiert

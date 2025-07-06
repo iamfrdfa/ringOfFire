@@ -41,3 +41,8 @@ testem.log
 .DS_Store
 Thumbs.db
 playing_cards-master.zip
+
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json
