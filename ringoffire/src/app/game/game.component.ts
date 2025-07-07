@@ -9,7 +9,7 @@ import {DialogAddPlayerComponent} from '../dialog-add-player/dialog-add-player.c
 import {MatDialogModule} from '@angular/material/dialog';
 import {GameInfoComponent} from '../game-info/game-info.component';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
-import {Firestore, collection, collectionData} from '@angular/fire/firestore';
+import {Firestore} from '@angular/fire/firestore';
 
 @Component({
     selector: 'app-game',
@@ -32,7 +32,7 @@ export class GameComponent {
     game: Game | undefined;
     currentCard: string | undefined = "";
 
-    constructor(private firestore: Firestore, public dialog: MatDialog) {
+    constructor(private firestore: AngularFirestore, public dialog: MatDialog) {
     }
 
     ngOnInit(): void {
